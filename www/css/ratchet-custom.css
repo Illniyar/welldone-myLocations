@@ -16,3 +16,6 @@
 .table-view-cell .navigate-right .right{
     right: 35px;
 }
+.content > .table-view:first-child {
+    margin-top: 0px;
+}

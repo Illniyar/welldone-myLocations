@@ -59,6 +59,15 @@ angular.module('locations.page',['ui.router','ct.ui.router.extras','data','locat
                 }
             });
         }
+        $scope.toggleOrder = function(){
+            $scope.orderDescending = !$scope.orderDescending;
+        }
+        $scope.toggleGroupBy = function(){
+            $scope.groupByCategory = !$scope.groupByCategory;
+        }
+        $scope.toggleCategoryFilter = function(){
+            $scope.showCategoryFilter = !$scope.showCategoryFilter;
+        }
     })
     .filter('categoryName',function(data){
         var categories;
@@ -74,4 +83,27 @@ angular.module('locations.page',['ui.router','ct.ui.router.extras','data','locat
             return '';
         }
 
+    })
+    .filter('locationOrder',function($filter){
+        var categoryName = $filter('categoryName');
+        return function(locations,sortDescending,groupByCategory,categoryFilter){
+            if (categoryFilter){
+                locations = locations.filter(function(location){
+                    var name = categoryName(location.category);
+                    return name.indexOf(categoryFilter) >=0;
+                })
+            }
+            if (!groupByCategory){
+                return locations.sort(function(a,b){
+                    return sortDescending? a.name > b.name : b.name > a.name;
+                })
+            } else {
+                return locations.sort(function(a,b){
+                    if (a.category == b.category){
+                        return sortDescending? a.name > b.name : b.name > a.name;
+                    }
+                    return sortDescending? a.category > b.category : b.category > a.category;
+                })
+            }
+        }
     })

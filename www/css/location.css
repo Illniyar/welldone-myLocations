@@ -8,3 +8,13 @@
     position:absolute;
     left:40%;
 }
+.location-item.table-header .icon {
+    font-size:17px;
+}
+.location-item.table-header .location-item-category .icon.active {
+    color:blue;
+}
+.location-item.table-header .category-filter {
+    width: 40%;
+    margin-left: 47%;
+}

@@ -2,15 +2,34 @@
     <a class="icon icon-compose pull-right"></a>
     <h1 class="title">LOCATIONS</h1>
 </header>
-<ul class="table-view">
-    <li class="table-view-cell location-item" ng-repeat="location in locations">
-        <a class="navigate-right">
-            <span class="location-item-name" ng-click="editLocation(location)">{{location.name}}</span>
-            <span class="location-item-category">{{location.category | categoryName}}</span>
-            <span class="icon icon-close remove right" ng-click="removeLocation(location)"></span>
-        </a>
-    </li>
-    <li class="table-view-cell" ng-click="addNew()">
-        Add new location
-    </li>
-</ul>
+<div class="content">
+    <ul class="table-view">
+        <li class="table-view-cell location-item table-header">
+            <span class="location-item-name">
+                Name <span ng-click="toggleOrder()" class="icon icon-caret"></span>
+            </span>
+            <span class="location-item-category">
+                Category
+                <span class="icon icon-pages" ng-click="toggleGroupBy()"
+                      ng-class="{active:groupByCategory}" ></span>
+                <span class="icon icon-gear" ng-click="toggleCategoryFilter()"></span>
+            </span>
+            <div ng-show="showCategoryFilter" class="category-filter">
+                <input type="text" ng-model="categoryFilter">
+            </div>
+        </li>
+        <li class="table-view-cell location-item"
+            ng-repeat="location in locations | locationOrder : orderDescending :groupByCategory :categoryFilter">
+            <a class="navigate-right">
+                <span class="location-item-name" ng-click="editLocation(location)">{{location.name}}</span>
+                <span class="location-item-category" ng-click="editLocation(location)">
+                    {{location.category | categoryName}}
+                </span>
+                <span class="icon icon-close remove right" ng-click="removeLocation(location)"></span>
+            </a>
+        </li>
+        <li class="table-view-cell" ng-click="addNew()">
+            Add new location
+        </li>
+    </ul>
+</div>
