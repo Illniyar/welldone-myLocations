@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row col-xs-12">
+        Categories
+    </div>
+    <div class="row category-header">
+        <div class="col-xs-12">NAME</div>
+    </div>
+    <div class="row category-item" ng-repeat="category in categories">
+        <input class="col-xs-8" ng-disabled="category._updating"
+               ng-model="category.name" ng-blur="updateCategory(category)">
+        <div class="col-xs-2" ng-click="removeCategory(category)">X</div>
+        <div class="col-xs-2" ng-show="category._updating">!!!</div>
+    </div>
+    <div class="row category-item" ng-show="newCategory">
+        <input class="col-xs-8" ng-disabled="category._updating"
+               ng-model="newCategory.name" ng-blur="addNewCategoryToCollection()">
+        <div class="col-xs-2" ng-click="removeNewCategory()">X</div>
+        <div class="col-xs-2" ng-show="newCategory._updating">!!!</div>
+    </div>
+    <div class="row category-item category-add-new">
+        <div class="col-xs-12" ng-click="addCategory()">Add New category</div>
+    </div>
+</div>

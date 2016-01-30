@@ -1,0 +1,24 @@
+{
+  "name": "myLocations",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Interview project for WellDone",
+  "repository": "https://github.com/ilniyar/welldone-myLocations",
+  "license": "MIT",
+  "devDependencies": {
+    "angular-mocks": "1.4.9",
+    "browser-sync": "2.11.1",
+    "chai": "3.4.1",
+    "karma": "0.13.19",
+    "karma-mocha": "0.2.1",
+    "karma-phantomjs-launcher": "0.2.3",
+    "karma-spec-reporter": "0.0.23",
+    "mocha": "2.3.4",
+    "phantomjs": "1.9.19"
+  },
+  "scripts": {
+    "start": "gulp serve",
+    "test": "karma start test/karma.conf.js"
+  },
+  "dependencies": {}
+}

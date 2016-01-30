@@ -1,0 +1,16 @@
+{
+  "name": "myLocations",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Interview project for WellDone",
+  "homepage": "https://github.com/ilniyar/welldone-myLocations",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "1.4.9",
+    "angular-ui-router": "0.2.15",
+    "angular-touch": "1.4.9",
+    "angular-bootstrap": "1.1.0",
+    "ui-router-extras": "0.1.0",
+    "angular-messages": "^1.4.9"
+  }
+}

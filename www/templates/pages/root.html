@@ -1,0 +1,14 @@
+<div>
+    <div ng-show="$state.includes('root.locations')" ui-view="locations"></div>
+    <div ng-show="$state.includes('root.categories')" ui-view="categories"></div>
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom container-fluid">
+    <ul class="row nav navbar-nav">
+        <li ng-class="{active:$state.includes('root.locations')}"
+            class="col-xs-6">
+            <a ui-sref="root.locations">LOCATIONS</a></li>
+        <li ng-class="{active:$state.includes('root.categories')}"
+            class="col-xs-6">
+            <a ui-sref="root.categories">CATEGORIES</a></li>
+    </ul>
+</nav>

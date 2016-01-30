@@ -1,0 +1,11 @@
+<div class="container">
+
+    <div>Locations</div>
+    <div class="row location-item"  ng-repeat="location in locations">
+        <div class="col-xs-4 col-xs-offset-1" ng-click="editLocation(location)" >{{location.name}}</div>
+        <div class="col-xs-4" ng-click="editLocation(location)" >{{location.category | categoryName}}</div>
+        <div class="col-xs-2" ng-click="removeLocation(location)">X</div>
+    </div>
+    <div ng-click="addNew()">Add new location</div>
+
+</div>
