@@ -1,11 +1,11 @@
-angular.module('location.edit.modal',['map','map.modal','ui.bootstrap'])
-    .service('locationEditModal',function($uibModal,$q,$rootScope){
+angular.module('location.edit.modal',['map','map.modal','ratchet.modal'])
+    .service('locationEditModal',function($q,$rootScope,rModal){
         this.open = function(categories,location,onEdit){
             var newScope = $rootScope.$new();
             newScope.categories = categories;
             newScope.location = location;
             newScope.onEdit = onEdit || function(){return $q.resolve()}
-            return $uibModal.open({
+            return rModal.open({
                 templateUrl: 'templates/modals/location-edit-modal.html',
                 controller: 'locationEditCtrl',
                 scope: newScope
@@ -21,7 +21,8 @@ angular.module('location.edit.modal',['map','map.modal','ui.bootstrap'])
             })
         }
         $scope.chooseCoords = function(){
-            mapModal.open($scope.location.coordinates).then(function(newCoordinates){
+            var x = mapModal.open($scope.location.coordinates);
+            x.then(function(newCoordinates){
                 $scope.location.coordinates = newCoordinates;
             })
         }
@@ -33,6 +34,6 @@ angular.module('location.edit.modal',['map','map.modal','ui.bootstrap'])
     })
     .filter('coordinates',function(){
         return function(value){
-            return value? (value.lat + ' ; ' + value.lng) : "";
+            return value? (value.lat.toFixed(2) + ' ; ' + value.lng.toFixed(2)) : "";
         }
     })

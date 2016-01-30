@@ -1,10 +1,10 @@
-angular.module('map.modal',['map','ngMessages','ui.bootstrap'])
-    .service('mapModal',function(map,$uibModal,$rootScope){
+angular.module('map.modal',['map','ngMessages','ratchet.modal'])
+    .service('mapModal',function(map,$rootScope,rModal){
         this.open = function(coordinates,readOnly){
             var newScope =$rootScope.$new();
             newScope.coordinates = coordinates;
             newScope.readOnly = readOnly;
-            return $uibModal.open({
+            return rModal.open({
                 templateUrl: 'templates/modals/map-modal.html',
                 scope: newScope
             }).result;

@@ -1,0 +1,18 @@
+.input-row select {
+    float: right;
+    width: 65%;
+    padding-left: 0;
+    margin-bottom: 0;
+    border: 0;
+}
+.table-view-cell .right{
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.table-view-cell .navigate-right .right{
+    right: 35px;
+}

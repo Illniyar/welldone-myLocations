@@ -46,6 +46,9 @@ angular.module('categories.page',['ui.router','ct.ui.router.extras','data'])
             $scope.newCategory = {};
         }
         $scope.addNewCategoryToCollection = function(){
+            if (!$scope.newCategory || !$scope.newCategory.name) {
+                return;
+            }
             setIsUpdating($scope.newCategory,true);
             categories.post($scope.newCategory).then(function(wrappedCategory){
                 $scope.categories.push(wrappedCategory);

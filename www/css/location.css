@@ -1,0 +1,10 @@
+.location-item .location-item-name {
+    display:inline-block;
+    width:40%;
+}
+.location-item .location-item-category {
+    display:inline-block;
+    width:40%;
+    position:absolute;
+    left:40%;
+}

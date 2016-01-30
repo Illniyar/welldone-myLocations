@@ -1,11 +1,16 @@
-<div class="container">
-
-    <div>Locations</div>
-    <div class="row location-item"  ng-repeat="location in locations">
-        <div class="col-xs-4 col-xs-offset-1" ng-click="editLocation(location)" >{{location.name}}</div>
-        <div class="col-xs-4" ng-click="editLocation(location)" >{{location.category | categoryName}}</div>
-        <div class="col-xs-2" ng-click="removeLocation(location)">X</div>
-    </div>
-    <div ng-click="addNew()">Add new location</div>
-
-</div>
+<header class="bar bar-nav">
+    <a class="icon icon-compose pull-right"></a>
+    <h1 class="title">LOCATIONS</h1>
+</header>
+<ul class="table-view">
+    <li class="table-view-cell location-item" ng-repeat="location in locations">
+        <a class="navigate-right">
+            <span class="location-item-name" ng-click="editLocation(location)">{{location.name}}</span>
+            <span class="location-item-category">{{location.category | categoryName}}</span>
+            <span class="icon icon-close remove right" ng-click="removeLocation(location)"></span>
+        </a>
+    </li>
+    <li class="table-view-cell" ng-click="addNew()">
+        Add new location
+    </li>
+</ul>

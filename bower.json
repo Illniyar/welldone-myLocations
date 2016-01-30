@@ -9,7 +9,6 @@
     "angular": "1.4.9",
     "angular-ui-router": "0.2.15",
     "angular-touch": "1.4.9",
-    "angular-bootstrap": "1.1.0",
     "ui-router-extras": "0.1.0",
     "angular-messages": "^1.4.9"
   }

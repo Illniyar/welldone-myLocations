@@ -6,7 +6,6 @@ module.exports = function (config) {
             'www/lib/angular/angular.js',
             'www/lib/angular-ui-router/release/angular-ui-router.js',
             'www/lib/ui-router-extras/release/ct-ui-router-extras.js',
-            'www/lib/angular-bootstrap/ui-bootstrap-tpls.js',
             'www/lib/angular-touch/angular-touch.js',
             'www/lib/angular-messages/angular-messages.js',
 

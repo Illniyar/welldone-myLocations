@@ -1,9 +1,10 @@
-<div class="modal-header">
-    <h3 class="modal-title">Location</h3>
-</div>
-<div class="modal-body">
+<header class="bar bar-nav">
+    <a class="icon icon-close pull-right" ng-click="$dismiss()"></a>
+</header>
+<div class="content">
     <map position="coordinates" readOnly="readOnly"></map>
-</div>
-<div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="$close(coordinates)">Close</button>
+    <div class="modal-footer">
+        <button class="btn btn-primary btn-block" type="button" ng-click="$close(coordinates)">Save</button>
+        <button class="btn btn-negative btn-block" type="button" ng-click="$dismiss()">Cancel</button>
+    </div>
 </div>
