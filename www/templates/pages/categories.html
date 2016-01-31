@@ -15,7 +15,7 @@
             <input class="location-item-name" ng-disabled="category._updating"
                    ng-model="newCategory.name" ng-blur="addNewCategoryToCollection()">
             <div class="icon icon-close remove right" ng-hide="category._updating"
-                 ng-click="removeNewCategory(category)"></div>
+                 ng-click="removeNewCategory()"></div>
             <div class="icon icon-refresh waiting right" ng-show="newCategory._updating"></div>
         </li>
         <button class="btn btn-primary btn-block" type="button"

@@ -30,6 +30,7 @@ angular.module('categories.page',['ui.router','ct.ui.router.extras','data'])
             if (category._updating !== undefined){
                 category._updating = value;
             } else {
+                // we don't want '_updating' to persist
                 Object.defineProperty(category,'_updating',{
                     value:value,
                     enumerable:false,
@@ -43,7 +44,7 @@ angular.module('categories.page',['ui.router','ct.ui.router.extras','data'])
             }
         }
         $scope.removeNewCategory = function(){
-            $scope.newCategory = {};
+            $scope.newCategory = null;
         }
         $scope.addNewCategoryToCollection = function(){
             if (!$scope.newCategory || !$scope.newCategory.name) {
