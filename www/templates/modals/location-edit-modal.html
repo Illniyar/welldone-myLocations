@@ -3,7 +3,7 @@
     <h1 class="title">Add Location</h1>
 </header>
 <div class="content content-padded">
-    <form name="locationEditForm" class="input-group">
+    <form name="locationEditForm" class="input-group location-edit-form">
         <div class="input-row">
             <label>Name</label>
             <input type="text" name="name" required ng-model="location.name" ng-model-options="{debounce:1}">
@@ -18,9 +18,10 @@
         <div ng-messages="locationEditForm.address.$error" role="alert" ng-if="locationEditForm.address.$touched">
             <div ng-message="required">You did not enter an address</div>
         </div>
-        <div ng-click="chooseCoords()" class="input-row">
+        <div  class="input-row coordinates-item">
             <label>Coordinates</label>
             <input name="coordinates" disabled required value="{{location.coordinates | coordinates}}">
+            <a ng-click="chooseCoords()" class="icon icon-compose pull-right edit-icon"></a>
         </div>
         <div ng-messages="locationEditForm.coordinates.$error" role="alert" ng-if="locationEditForm.coordinates.$touched">
             <div ng-message="required">you must choose coordinates. Click to open map</div>

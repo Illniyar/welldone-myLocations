@@ -1,5 +1,9 @@
 <header class="bar bar-nav">
-    <a class="icon icon-compose pull-right"></a>
+    <span class="icon icon-plus pull-right" ng-click="addNew()"></span>
+    <a class="icon icon-compose pull-right" ng-show="currentChoice >= 0"
+       ng-click="editLocation(locations[currentChoice])"></a>
+    <a class="icon icon-close pull-right" ng-show="currentChoice >= 0"
+       ng-click="removeLocation(locations[currentChoice])"></a>
     <h1 class="title">LOCATIONS</h1>
 </header>
 <div class="content">
@@ -19,17 +23,16 @@
             </div>
         </li>
         <li class="table-view-cell location-item"
-            ng-repeat="location in locations | locationOrder : orderDescending :groupByCategory :categoryFilter">
-            <a class="navigate-right">
-                <span class="location-item-name" ng-click="editLocation(location)">{{location.name}}</span>
-                <span class="location-item-category" ng-click="editLocation(location)">
-                    {{location.category | categoryName}}
-                </span>
-                <span class="icon icon-close remove right" ng-click="removeLocation(location)"></span>
-            </a>
-        </li>
-        <li class="table-view-cell" ng-click="addNew()">
-            Add new location
+            ng-repeat="location in locations | locationOrder : orderDescending :groupByCategory :categoryFilter"
+                ng-class="{active:currentChoice == $index}">
+            <span class="location-item-name" ng-click="setChoice($index)">{{location.name}}</span>
+            <span class="location-item-category" ng-click="setChoice($index)">
+                {{location.category | categoryName}}
+            </span>
+            <span class="right">
+            <span class="icon icon-right" ng-click="showLocation(location)"></span>
+            </span>
+
         </li>
     </ul>
 </div>

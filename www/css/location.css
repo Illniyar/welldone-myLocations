@@ -18,3 +18,9 @@
     width: 40%;
     margin-left: 47%;
 }
+.location-item.active {
+    background-color:#E2E1E1;
+}
+.location-edit-form .coordinates-item .edit-icon {
+    line-height:0;
+}

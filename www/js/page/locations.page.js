@@ -1,4 +1,4 @@
-angular.module('locations.page',['ui.router','ct.ui.router.extras','data','location.edit.modal'])
+angular.module('locations.page',['ui.router','ct.ui.router.extras','data','location.edit.modal','map.modal'])
     .provider('locationsPageRoute',function($stateProvider){
         this.load = function(parent){
             $stateProvider.state(parent +'.locations',{
@@ -23,7 +23,7 @@ angular.module('locations.page',['ui.router','ct.ui.router.extras','data','locat
         }
         this.$get = function(){};
     })
-    .controller('locationsCtrl',function($scope,categories,locations,locationEditModal,$q){
+    .controller('locationsCtrl',function($scope,categories,locations,locationEditModal,$q,mapModal){
         $scope.locations = locations;
 
         $scope.addNew = function(){
@@ -43,6 +43,7 @@ angular.module('locations.page',['ui.router','ct.ui.router.extras','data','locat
                         $scope.locations.splice(i,1);
                     }
                 }
+                $scope.currentChoice = undefined;
             })
         }
         $scope.editLocation = function(location){
@@ -67,6 +68,12 @@ angular.module('locations.page',['ui.router','ct.ui.router.extras','data','locat
         }
         $scope.toggleCategoryFilter = function(){
             $scope.showCategoryFilter = !$scope.showCategoryFilter;
+        }
+        $scope.setChoice = function($index){
+            $scope.currentChoice = $scope.currentChoice == $index? undefined:$index;
+        }
+        $scope.showLocation = function(location){
+            mapModal.open(location.coordinates,true);
         }
     })
     .filter('categoryName',function(data){

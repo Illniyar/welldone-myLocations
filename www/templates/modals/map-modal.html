@@ -2,8 +2,8 @@
     <a class="icon icon-close pull-right" ng-click="$dismiss()"></a>
 </header>
 <div class="content">
-    <map position="coordinates" readOnly="readOnly"></map>
-    <div class="modal-footer">
+    <map position="coordinates" read-only="readOnly"></map>
+    <div class="modal-footer" ng-hide="readOnly">
         <button class="btn btn-primary btn-block" type="button" ng-click="$close(coordinates)">Save</button>
         <button class="btn btn-negative btn-block" type="button" ng-click="$dismiss()">Cancel</button>
     </div>
