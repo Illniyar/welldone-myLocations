@@ -19,3 +19,6 @@
 .content > .table-view:first-child {
     margin-top: 0px;
 }
+form .input-row + .btn-block {
+    margin-top: 10px;
+}
