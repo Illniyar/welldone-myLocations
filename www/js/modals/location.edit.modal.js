@@ -3,7 +3,10 @@ angular.module('location.edit.modal',['map','map.modal','ratchet.modal'])
         this.open = function(categories,location,onEdit){
             var newScope = $rootScope.$new();
             newScope.categories = categories;
-            newScope.location = location;
+            newScope.location = location || {};
+            if (!location) {
+                newScope.isNewLocation = true;
+            }
             newScope.onEdit = onEdit || function(){return $q.resolve()}
             return rModal.open({
                 templateUrl: 'templates/modals/location-edit-modal.html',

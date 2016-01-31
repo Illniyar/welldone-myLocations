@@ -27,7 +27,7 @@ angular.module('locations.page',['ui.router','ct.ui.router.extras','data','locat
         $scope.locations = locations;
 
         $scope.addNew = function(){
-            locationEditModal.open(categories,{},function(newLocation){
+            locationEditModal.open(categories,null,function(newLocation){
                 if (newLocation.name =='bad'){
                     return $q.reject('bad!')
                 }
