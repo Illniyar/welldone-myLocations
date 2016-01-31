@@ -1,4 +1,8 @@
 angular.module('ratchet.modal',[])
+/**
+ * this service replicates some of the funtionality of angular-ui-bootstrap's modal with ratchet.js css
+ * since ratchet.js' actual js doesn't jive well with angular
+ */
 .service('rModal',function($compile,$controller,$timeout,$templateRequest,$rootScope,$q){
         function ModalInstance(template,controller,parentScope){
             this.template = template;
@@ -8,16 +12,7 @@ angular.module('ratchet.modal',[])
         }
         ModalInstance.prototype.createDOM = function(){
             this.$scope = this.parentScope || $rootScope.$new();
-            this.$scope.$close = function(arg){
-                this.close().then(function(){
-                    this.onFinish.resolve(arg);
-                }.bind(this))
-            }.bind(this);
-            this.$scope.$dismiss = function(arg){
-                this.close().then(function(){
-                    this.onFinish.reject(arg);
-                }.bind(this))
-            }.bind(this);
+            this.enhanceScope(this.$scope);
             $controller(this.controllerName,{$scope:this.$scope});
             this.modalContent = $compile(this.template)(this.$scope);
             this.modalWrapper = angular.element(document.createElement('div'));
@@ -26,21 +21,20 @@ angular.module('ratchet.modal',[])
                 this.modalWrapper.append(elem);
             }.bind(this))
         }
-        ModalInstance.prototype.show = function(){
+        ModalInstance.prototype.setVisible = function(visible){
             var transitionEnd = $q.defer();
+            //to support all browsers:
             this.modalWrapper.one('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd',function(){
                 transitionEnd.resolve();
             })
-            this.modalWrapper.addClass('active');
+            this.modalWrapper.toggleClass('active',visible);
             return transitionEnd.promise;
         }
+        ModalInstance.prototype.show = function(){
+            return this.setVisible(true);
+        }
         ModalInstance.prototype.hide = function(){
-            var transitionEnd = $q.defer();
-            this.modalWrapper.one('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd',function(){
-                transitionEnd.resolve();
-            })
-            this.modalWrapper.removeClass('active');
-            return transitionEnd.promise;
+            return this.setVisible(false);
         }
         ModalInstance.prototype.close = function(){
             return this.hide().then(function() {
@@ -48,6 +42,20 @@ angular.module('ratchet.modal',[])
                 this.$scope.$destroy();
             }.bind(this));
         }
+
+        ModalInstance.prototype.enhanceScope = function(scope){
+            scope.$close = function(arg){
+                this.close().then(function(){
+                    this.onFinish.resolve(arg);
+                }.bind(this))
+            }.bind(this);
+            scope.$dismiss = function(arg){
+                this.close().then(function(){
+                    this.onFinish.reject(arg);
+                }.bind(this))
+            }.bind(this);
+        }
+
         this.open = function(options){
             var modalInstancePromise =$templateRequest(options.templateUrl).then(function(template){
                 var modalInstance = new ModalInstance(template,options.controller,options.scope);
