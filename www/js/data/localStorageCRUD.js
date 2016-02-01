@@ -45,8 +45,10 @@ angular.module('localStorageCRUD',['localStorage'])
             })
         }
         Collection.prototype.getList = function(){
-
-            return delayResult(this._getEnhancedItemArray());
+            var $object = this._getEnhancedItemArray()
+            var promise =delayResult($object);
+            promise.$object =$object;
+            return promise;
         }
         Collection.prototype.post = function(obj){
             obj = angular.copy(obj); //we should not modify obj in place
@@ -89,6 +91,9 @@ angular.module('localStorageCRUD',['localStorage'])
                 }
             })
             angular.extend(this,raw);
+            (extensions[collection._collectionKey] || []).forEach(function(extension){
+                extension(this);
+            }.bind(this))
         }
         Item.prototype.get = function(){
             var list = localStorage.get(this.collectionKey);
@@ -117,6 +122,7 @@ angular.module('localStorageCRUD',['localStorage'])
                 }
             }
         }
+        var extensions = {};
         this.all = function(collectionKey){
             return new Collection(collectionKey)
         }
@@ -134,6 +140,8 @@ angular.module('localStorageCRUD',['localStorage'])
                     })
                 }
             }
-
+        }
+        this.extendModel = function(route,fn){
+            extensions[route] = (extensions[route] || []).push(fn);
         }
     })

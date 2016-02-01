@@ -7,3 +7,4 @@ angular.module('myLocations',['ui.router','ngTouch','mobile.utils','ngAnimate','
     .config(function ServiceConfig(mapProvider){
         mapProvider.load('AIzaSyCCpDsVlaan5P5-pKZmSN1Oao0f6892kfo');
     })
+

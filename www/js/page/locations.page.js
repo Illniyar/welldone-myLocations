@@ -25,6 +25,18 @@ angular.module('locations.page',['ui.router','ct.ui.router.extras','data','locat
     })
     .controller('locationsCtrl',function($scope,categories,locations,locationEditModal,$q,mapModal){
         $scope.locations = locations;
+        function addCategoryToLocation(location){
+            for(var i=0;i <categories.length;i++){
+                if (categories[i].id == location.category){
+                    Object.defineProperty(location,'categoryObj',{
+                        value:categories[i],
+                        enumerable:false,
+                        readOnly:true
+                    })
+                }
+            }
+        }
+        locations.forEach(addCategoryToLocation)
 
         $scope.addNew = function(){
             locationEditModal.open(categories,null,function(newLocation){
@@ -33,6 +45,7 @@ angular.module('locations.page',['ui.router','ct.ui.router.extras','data','locat
                 }
                 return $scope.locations.post(newLocation).then(function(wrappedLocation){
                     $scope.locations.push(wrappedLocation);
+                    addCategoryToLocation(wrappedLocation);
                 })
             });
         }
@@ -76,28 +89,11 @@ angular.module('locations.page',['ui.router','ct.ui.router.extras','data','locat
             mapModal.open(location.coordinates,true);
         }
     })
-    .filter('categoryName',function(data){
-        var categories;
-        data.getCategories().then(function(res){
-            categories = res;
-        });
-        return function(categoryId){
-            for (var i=0; i <categories.length;i++) {
-                if (categories[i].id == categoryId){
-                    return categories[i].name;
-                }
-            }
-            return '';
-        }
-
-    })
-    .filter('locationOrder',function($filter){
-        var categoryName = $filter('categoryName');
+    .filter('locationOrder',function(){
         return function(locations,sortDescending,groupByCategory,categoryFilter){
             if (categoryFilter){
                 locations = locations.filter(function(location){
-                    var name = categoryName(location.category);
-                    return name.indexOf(categoryFilter) >=0;
+                    return location.categoryObj.name.indexOf(categoryFilter) >=0;
                 })
             }
             if (!groupByCategory){

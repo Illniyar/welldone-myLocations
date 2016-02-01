@@ -27,7 +27,7 @@
                 ng-class="{active:currentChoice == $index}">
             <span class="location-item-name" ng-click="setChoice($index)">{{location.name}}</span>
             <span class="location-item-category" ng-click="setChoice($index)">
-                {{location.category | categoryName}}
+                {{location.categoryObj.name}}
             </span>
             <span class="right">
             <span class="icon icon-right" ng-click="showLocation(location)"></span>
