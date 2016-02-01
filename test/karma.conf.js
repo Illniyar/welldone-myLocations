@@ -8,6 +8,7 @@ module.exports = function (config) {
             'www/lib/ui-router-extras/release/ct-ui-router-extras.js',
             'www/lib/angular-touch/angular-touch.js',
             'www/lib/angular-messages/angular-messages.js',
+            'www/lib/angular-animate/angular-animate.js',
 
             //test frameworks
             'test/lib/chai.js',

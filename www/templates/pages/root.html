@@ -1,16 +1,20 @@
 <div>
-    <div ng-show="$state.includes('root.locations')" ui-view="locations"></div>
-    <div ng-show="$state.includes('root.categories')" ui-view="categories"></div>
+    <div ng-show="$state.includes('root.categories')" ui-view="categories"
+         ng-swipe-left="$state.go('root.locations')"
+         class="categories-view"></div>
+    <div ng-show="$state.includes('root.locations')" ui-view="locations"
+         ng-swipe-right="$state.go('root.categories')"
+         class="locations-view"></div>
 </div>
 <nav class="bar bar-tab">
-    <a ng-class="{active:$state.includes('root.locations')}"
-        class="tab-item" ui-sref="root.locations">
-        <span class="icon icon-list"></span>
-        <span class="tab-label">LOCATIONS</span>
-    </a>
     <a ng-class="{active:$state.includes('root.categories')}"
         class="tab-item" ui-sref="root.categories">
         <span class="icon icon-pages"></span>
         <span class="tab-label">CATEGORIES</span>
+    </a>
+    <a ng-class="{active:$state.includes('root.locations')}"
+       class="tab-item" ui-sref="root.locations">
+        <span class="icon icon-list"></span>
+        <span class="tab-label">LOCATIONS</span>
     </a>
 </nav>

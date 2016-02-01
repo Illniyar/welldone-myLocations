@@ -1,5 +1,5 @@
 "use strict";
-angular.module('myLocations',['ui.router','ngTouch','mobile.utils','map','root.page'])
+angular.module('myLocations',['ui.router','ngTouch','mobile.utils','ngAnimate','map','root.page'])
     .config(function RouteConfig(rootPageRouteProvider,$stateProvider,$urlRouterProvider){
         rootPageRouteProvider.load('root');
         $urlRouterProvider.otherwise('/category');

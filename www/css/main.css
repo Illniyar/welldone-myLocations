@@ -10,3 +10,39 @@ body {
 .table-view .table-header {
     background-color:#E2E1E1;
 }
+
+/*page transition animation*/
+
+.locations-view,.locations-view .content,
+.categories-view,.categories-view .content{
+    transition: transform linear 0.1s;
+}
+
+/*we are relying on order here to determine what overrides how
+  make sure to keep the order intact:
+  -active should always come last*/
+.locations-view.ng-hide-remove .content{
+    transform: translate3d(100%, 0px, 0px);
+}
+.locations-view.ng-hide-remove-active .content{
+    transform: translate3d(0px, 0px, 0px);
+}
+.locations-view.ng-hide-add .content{
+    transform: translate3d(0px, 0px, 0px);
+}
+.locations-view.ng-hide-add-active .content{
+    transform: translate3d(100%, 0px, 0px);
+}
+
+.categories-view.ng-hide-remove .content{
+    transform: translate3d(-100%, 0px, 0px);
+}
+.categories-view.ng-hide-remove-active .content{
+    transform: translate3d(0px, 0px, 0px);
+}
+.categories-view.ng-hide-add .content{
+    transform: translate3d(0px, 0px, 0px);
+}
+.categories-view.ng-hide-add-active .content{
+    transform: translate3d(-100%, 0px, 0px);
+}
