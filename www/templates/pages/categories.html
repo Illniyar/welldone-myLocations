@@ -13,7 +13,8 @@
         <li class="table-view-cell category-item" ng-show="newCategory">
             <input class="location-item-name" ng-disabled="category._updating"
                    ng-model="newCategory.name" ng-blur="addNewCategoryToCollection()">
-            <div class="icon icon-close remove right" ng-hide="category._updating"
+            <div class="icon icon-plus add right" ng-show="newCategory.name && !newCategory._updating"></div>
+            <div class="icon icon-close remove right" ng-hide="category._updating || newCategory.name"
                  ng-click="removeNewCategory()"></div>
             <div class="icon icon-refresh waiting right" ng-show="newCategory._updating"></div>
         </li>
