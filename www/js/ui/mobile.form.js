@@ -1,4 +1,4 @@
-angular.module('mobile.utils',[])
+angular.module('mobile.form',[])
 /**
  * directive to get tabbing between inputs in a form working
  * note that multiple directives can act on the same element type
