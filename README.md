@@ -23,11 +23,11 @@ The app was designed for mobile phones, while it will work in a desktop browser,
 The app has 2 pages - locations and categories, accessible from the bottom bar.  
 You can swipe left or right to navigate between the pages.  
 
-**Categories:**
+**Categories:**  
   There is a "add category" button, when pressed it will add an input you can change a category's name.  
   Category names can be changed in line.  
   
-**Locations:**
+**Locations:**  
   at the top bar there is a plus icon.  
   you can press that icon to add a new location.  
   When adding a location, a popup will appear with a form.  
