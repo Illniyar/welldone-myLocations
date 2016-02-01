@@ -78,6 +78,9 @@ angular.module('locations.page',['ui.router','ct.ui.router.extras','data','locat
                 }
             });
         }
+        $scope.showLocation = function(location){
+            mapModal.open(location.coordinates,true);
+        }
         $scope.tableOptions = {
             columns:[
                 {key:'name',name:'Name',sort:true},
