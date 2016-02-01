@@ -54,7 +54,9 @@ angular.module('ui.myTable',[])
                 $scope.itemsFiltered = items;
             }
             $scope.$watch('textFilter',$scope.applyFilter.bind($scope));
-
+            $scope.$watchCollection('items',function(){
+                $scope.applyFilter();
+            })
         }
     }
 })
