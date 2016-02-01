@@ -1,0 +1,26 @@
+<ul class="table-view">
+    <li class="table-view-cell item header">
+            <span ng-repeat="c in ::options.columns">
+                {{::c.name}}
+                <span ng-if="::c.sort" ng-click="toggleSort(c.key)" class="icon icon-caret"></span>
+                <span ng-if="::c.groupBy" class="icon icon-pages"
+                      ng-click="toggleGroupBy(c.key)"
+                      ng-class="{active:groupBy == c.key}" ></span>
+                <span ng-if="::c.filter"  class="icon icon-gear"
+                      ng-click="toggleTextFilter(c.key)"></span>
+            </span>
+            <div ng-show="showTextFilter" class="filter">
+                <input type="text" ng-model="textFilter">
+            </div>
+    </li>
+    <li class="table-view-cell item content-item"
+        ng-repeat="item in itemsFiltered track by  item.id"
+        ng-class="{active:choice == item}">
+        <span ng-repeat="c in ::options.columns" ng-click="toggleChoice(item)">
+            {{item[c.key]}}
+        </span>
+        <span class="right" ng-if="::options.open">
+            <span class="icon icon-right" ng-click="options.open(item)"></span>
+        </span>
+    </li>
+</ul>

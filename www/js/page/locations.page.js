@@ -1,4 +1,4 @@
-angular.module('locations.page',['ui.router','ct.ui.router.extras','data','location.edit.modal','map.modal'])
+angular.module('locations.page',['ui.router','ct.ui.router.extras','data','location.edit.modal','map.modal','ui.myTable'])
     .provider('locationsPageRoute',function($stateProvider){
         this.load = function(parent){
             $stateProvider.state(parent +'.locations',{
@@ -26,13 +26,18 @@ angular.module('locations.page',['ui.router','ct.ui.router.extras','data','locat
     .controller('locationsCtrl',function($scope,categories,locations,locationEditModal,$q,mapModal){
         $scope.locations = locations;
         function addCategoryToLocation(location){
+            var category = null;
             for(var i=0;i <categories.length;i++){
-                if (categories[i].id == location.category){
-                    Object.defineProperty(location,'categoryObj',{
-                        value:categories[i],
+                category = categories[i];
+                if (category.id == location.category){
+                    Object.defineProperty(location,'categoryName',{
+                        get:function(){
+                            return category.name;
+                        },
                         enumerable:false,
                         readOnly:true
                     })
+                    return;
                 }
             }
         }
@@ -73,40 +78,11 @@ angular.module('locations.page',['ui.router','ct.ui.router.extras','data','locat
                 }
             });
         }
-        $scope.toggleOrder = function(){
-            $scope.orderDescending = !$scope.orderDescending;
-        }
-        $scope.toggleGroupBy = function(){
-            $scope.groupByCategory = !$scope.groupByCategory;
-        }
-        $scope.toggleCategoryFilter = function(){
-            $scope.showCategoryFilter = !$scope.showCategoryFilter;
-        }
-        $scope.setChoice = function($index){
-            $scope.currentChoice = $scope.currentChoice == $index? undefined:$index;
-        }
-        $scope.showLocation = function(location){
-            mapModal.open(location.coordinates,true);
-        }
-    })
-    .filter('locationOrder',function(){
-        return function(locations,sortDescending,groupByCategory,categoryFilter){
-            if (categoryFilter){
-                locations = locations.filter(function(location){
-                    return location.categoryObj.name.indexOf(categoryFilter) >=0;
-                })
-            }
-            if (!groupByCategory){
-                return locations.sort(function(a,b){
-                    return sortDescending? a.name > b.name : b.name > a.name;
-                })
-            } else {
-                return locations.sort(function(a,b){
-                    if (a.category == b.category){
-                        return sortDescending? a.name > b.name : b.name > a.name;
-                    }
-                    return sortDescending? a.category > b.category : b.category > a.category;
-                })
-            }
+        $scope.tableOptions = {
+            columns:[
+                {key:'name',name:'Name',sort:true},
+                {key:'categoryName',name:'Category',filter:true,groupBy:true}
+            ],
+            open: $scope.showLocation
         }
     })

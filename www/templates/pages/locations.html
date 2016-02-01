@@ -1,38 +1,12 @@
 <header class="bar bar-nav">
     <a class="icon icon-plus pull-right" ng-click="addNew()"></a>
-    <a class="icon icon-compose pull-right" ng-show="currentChoice >= 0"
-       ng-click="editLocation(locations[currentChoice])"></a>
-    <a class="icon icon-close pull-right" ng-show="currentChoice >= 0"
-       ng-click="removeLocation(locations[currentChoice])"></a>
+    <a class="icon icon-compose pull-right" ng-show="chosenLocation"
+       ng-click="editLocation(chosenLocation)"></a>
+    <a class="icon icon-close pull-right" ng-show="chosenLocation"
+       ng-click="removeLocation(chosenLocation)"></a>
     <h1 class="title">LOCATIONS</h1>
 </header>
 <div class="content">
-    <ul class="table-view">
-        <li class="table-view-cell location-item table-header">
-            <span class="location-item-name">
-                Name <span ng-click="toggleOrder()" class="icon icon-caret"></span>
-            </span>
-            <span class="location-item-category">
-                Category
-                <span class="icon icon-pages" ng-click="toggleGroupBy()"
-                      ng-class="{active:groupByCategory}" ></span>
-                <span class="icon icon-gear" ng-click="toggleCategoryFilter()"></span>
-            </span>
-            <div ng-show="showCategoryFilter" class="category-filter">
-                <input type="text" ng-model="categoryFilter">
-            </div>
-        </li>
-        <li class="table-view-cell location-item"
-            ng-repeat="location in locations | locationOrder : orderDescending :groupByCategory :categoryFilter"
-                ng-class="{active:currentChoice == $index}">
-            <span class="location-item-name" ng-click="setChoice($index)">{{location.name}}</span>
-            <span class="location-item-category" ng-click="setChoice($index)">
-                {{location.categoryObj.name}}
-            </span>
-            <span class="right">
-            <span class="icon icon-right" ng-click="showLocation(location)"></span>
-            </span>
-
-        </li>
-    </ul>
+    <my-table items="locations" choice="chosenLocation"
+              options="tableOptions"
 </div>

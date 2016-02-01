@@ -18,7 +18,10 @@ module.exports = function (config) {
             //app files
             'www/js/**/*.js',
             //test suites
-            'test/unit/**/*.spec.js'
+            'test/unit/**/*.spec.js',
+
+            //templates
+            'www/templates/**/*.html'
         ],
 
         autoWatch: false,
@@ -33,8 +36,15 @@ module.exports = function (config) {
         plugins: [
             'karma-phantomjs-launcher',
             'karma-mocha',
-            'karma-spec-reporter'
-        ]
-
+            'karma-spec-reporter',
+            'karma-ng-html2js-preprocessor'
+        ],
+        preprocessors: {
+            'www/templates/**/*.html': ['ng-html2js']
+        },
+        ngHtml2JsPreprocessor: {
+            moduleName: 'templates',
+            stripPrefix: 'www/'
+        }
     });
 };

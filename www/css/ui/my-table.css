@@ -1,0 +1,23 @@
+my-table .item > span:first-child {
+    display:inline-block;
+    width:40%;
+}
+my-table .item > span:nth-child(2) {
+    display:inline-block;
+    width:40%;
+    position:absolute;
+    left:40%;
+}
+my-table .header .icon {
+    font-size:17px;
+}
+my-table .header .icon.active {
+    color:blue;
+}
+my-table .header .filter {
+    width: 40%;
+    margin-left: 47%;
+}
+my-table .item.active {
+    background-color:#E2E1E1;
+}
